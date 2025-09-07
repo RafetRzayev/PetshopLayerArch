@@ -1,6 +1,7 @@
 using Petshop.DAL;
 using Petshop.BLL;
 using Petshop.DAL.DataContext;
+using Petshop.BLL.Constants;
 
 namespace Petshop.MVC
 {
@@ -15,6 +16,9 @@ namespace Petshop.MVC
 
             builder.Services.AddDataAccessLayerServices(builder.Configuration);
             builder.Services.AddBussinessLogicLayerServices();
+
+
+            FilePathConstants.ReviewImagePath = Path.Combine(builder.Environment.WebRootPath, "images", "reviews");
 
             var app = builder.Build();
 

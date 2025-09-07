@@ -14,6 +14,8 @@ public static class BussinessLogicLayerServiceRegistration
         services.AddScoped<ICategoryService, CategoryManager>();
         services.AddScoped<IProductService, ProductManager>();
         services.AddScoped<IHomeService, HomeManager>();
+        services.AddScoped<IReviewService, ReviewManager>();
+        services.AddScoped<FileService>();
 
         return services;
     }

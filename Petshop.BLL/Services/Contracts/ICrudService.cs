@@ -12,6 +12,10 @@ public interface ICrudService<TEntity, TViewModel, TCreateViewModel, TUpdateView
         Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
         bool AsNoTracking = false);
 
+    Task<TViewModel?> GetAsync(Expression<Func<TEntity, bool>> predicate,
+        Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null,
+        bool AsNoTracking = false);
+
     Task<TViewModel?> GetByIdAsync(int id);
     Task CreateAsync(TCreateViewModel model);
     Task<bool> UpdateAsync(int id, TUpdateViewModel model);

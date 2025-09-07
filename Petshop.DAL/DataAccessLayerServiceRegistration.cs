@@ -22,6 +22,7 @@ public static class DataAccessLayerServiceRegistration
         services.AddScoped(typeof(IRepository<>), typeof(EfCoreRepository<>));
         services.AddScoped<IProductRepository, ProductRepository>();
         services.AddScoped<ICategoryRepository, CategoryRepository>();
+        services.AddScoped<IReviewRepository, ReviewRepository>();
 
         return services;
     }

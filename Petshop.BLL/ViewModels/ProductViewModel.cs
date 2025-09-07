@@ -5,6 +5,7 @@ public class ProductViewModel
     public int Id { get; set; }
 
     public string? Name { get; set; }
+    public string DetailsUrl => $"{Name?.Replace(" ", "-").Replace("/", "-")}-{Id}";
 
     public string? Description { get; set; }
 
@@ -19,6 +20,8 @@ public class ProductViewModel
     //public CategoryViewModel? Category { get; set; }
 
     public IList<string> ImageNames { get; set; } = [];
+    public IList<string> TagNames { get; set; } = [];
+    public List<ReviewViewModel> Reviews { get; set; } = [];
 }
 
 public class CreateProductViewModel
