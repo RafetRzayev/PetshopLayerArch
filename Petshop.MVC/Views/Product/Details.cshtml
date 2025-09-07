@@ -200,7 +200,7 @@
                                 <div class="col-lg-6 d-flex flex-wrap gap-3">
                                     <div class="col-md-2">
                                         <div class="image-holder">
-                                            <img src="~/images/reviews/@item.ImageName" alt="review" class="img-fluid rounded-circle">
+                                            <img src="~/images/users/@item.AppUserProfileImageName" alt="review" class="img-fluid rounded-circle">
                                         </div>
                                     </div>
                                     <div class="col-md-8">
@@ -226,7 +226,7 @@
                                                 <span class="rating-count">(@item.Rate)</span>
                                             </div>
                                             <div class="review-header">
-                                                <span class="author-name">@item.Name</span>
+                                                <span class="author-name">@(item.AppUserName==""?item.Name:item.AppUserName)</span>
                                                 <span class="review-date">– @item.CreatedAt</span>
                                             </div>
                                             <p>
@@ -247,21 +247,39 @@
                                     <div class="review-rating">
                                         <span>Your rating *</span>
                                         <div class="rating-container d-flex align-items-center">
-                                            <input type="range" min="1" max="5" name="Rate"/>
+                                            <input type="number" min="1" max="5" value="1" name="Rate"/>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="pb-3">
                                     <input type="file" class="form-control" data-text="Choose your file" name="ImageFile">
                                 </div>
-                                <div class="pb-3">
-                                    <label>Your Name</label>
-                                    <input type="text" name="name" placeholder="Write your name here*" class="form-control">
-                                </div>
-                                <div class="pb-3">
-                                    <label>Your Email</label>
-                                    <input type="text" name="email" placeholder="Write your email here*" class="form-control">
-                                </div>
+                             
+                                @if(!User.Identity!.IsAuthenticated)
+                                {
+                                    <div class="pb-3">
+                                        <label>Your Name</label>
+                                        <input type="text" name="name" placeholder="Write your name here*" class="form-control">
+                                    </div>
+
+                                    <div class="pb-3">
+                                        <label>Your Email</label>
+                                        <input type="text" name="email" placeholder="Write your email here*" class="form-control">
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="pb-3">
+                                        <label>Your Name</label>
+                                        <input type="text" value="@User.Identity.Name" disabled name="name" placeholder="Write your name here*" class="form-control">
+                                    </div>
+
+                                    <div class="pb-3">
+                                        <label>Your Email</label>
+                                        <input type="text" value="@User.Claims.FirstOrDefault(x=>x.Type.Contains("email"))?.Value" disabled name="email" placeholder="Write your email here*" class="form-control">
+                                    </div>
+                                }
+
                                 <div class="pb-3">
                                     <label>Your Review</label>
                                     <textarea  name="description" class="form-control" placeholder="Write your review here*"></textarea>

@@ -29,7 +29,7 @@ namespace Petshop.BLL.ViewModels
         public ReviewStatus ReviewStatus { get; set; }
         public string? Name { get; set; }
         public string? Email { get; set; }
-        public string? Description { get; set; }
+        public string Description { get; set; } = null!;
         public int ProductId { get; set; }
         public string? AppUserId { get; set; }
     }

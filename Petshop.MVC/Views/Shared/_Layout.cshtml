@@ -216,8 +216,19 @@
                     <ul class="d-flex justify-content-end list-unstyled m-0">
                         <li>
                             <a href="account.html" class="mx-3">
-                                <iconify-icon icon="healthicons:person" class="fs-4"></iconify-icon>
+                                <iconify-icon icon="healthicons:person" class="fs-4">
+                                </iconify-icon>
+
                             </a>
+                            @if (User.Identity!.IsAuthenticated)
+                            {
+                                <span>@User.Identity.Name</span>
+                                <a asp-controller="account" asp-action="logout">Logout</a>
+                            }
+                            else
+                            {
+                                <a asp-controller="account" asp-action="login">Login</a>
+                            }
                         </li>
                         <li>
                             <a href="wishlist.html" class="mx-3">
@@ -364,8 +375,19 @@
                             <ul class="d-flex justify-content-end list-unstyled m-0">
                                 <li>
                                     <a href="account.html" class="mx-3">
-                                        <iconify-icon icon="healthicons:person" class="fs-4"></iconify-icon>
+                                        <iconify-icon icon="healthicons:person" class="fs-4">
+                                        </iconify-icon>
+
                                     </a>
+                                    @if (User.Identity!.IsAuthenticated)
+                                    {
+                                        <span>@User.Identity.Name</span>
+                                        <a asp-controller="account" asp-action="logout">Logout</a>
+                                    }
+                                    else
+                                    {
+                                        <a asp-controller="account" asp-action="login">Login</a>
+                                    }
                                 </li>
                                 <li>
                                     <a href="wishlist.html" class="mx-3">

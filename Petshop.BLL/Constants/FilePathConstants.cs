@@ -10,5 +10,6 @@ namespace Petshop.BLL.Constants
     {
         public static string ProductImagePath = "";
         public static string ReviewImagePath = "";
+        public static string ProfileImagePath = "";
     }
 }
