@@ -21,7 +21,7 @@ public class EfCoreRepository<T> : IRepository<T> where T : Entity
         await DbContext.Set<T>().AddAsync(entity);
         await DbContext.SaveChangesAsync();
     }
-   
+    
     public virtual  async Task DeleteAsync(T entity)
     {
         DbContext.Set<T>().Remove(entity);

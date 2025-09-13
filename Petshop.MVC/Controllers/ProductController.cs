@@ -12,7 +12,7 @@ namespace Petshop.MVC.Controllers
         private readonly IProductService _productService;
         private readonly IReviewService _reviewService;
         private readonly UserManager<AppUser> _userManager;
-      
+        
         public ProductController(IProductService productService, IReviewService reviewService, UserManager<AppUser> userManager)
         {
             _productService = productService;

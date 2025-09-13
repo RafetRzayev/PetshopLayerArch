@@ -16,6 +16,7 @@ public static class BussinessLogicLayerServiceRegistration
         services.AddScoped<IHomeService, HomeManager>();
         services.AddScoped<IReviewService, ReviewManager>();
         services.AddScoped<FileService>();
+        services.AddScoped<BasketManager>();
 
         return services;
     }
