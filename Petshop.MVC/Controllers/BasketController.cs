@@ -12,10 +12,18 @@ namespace Petshop.MVC.Controllers
             _basketManager = basketManager;
         }
 
-        public IActionResult AddToBasket(int productId)
+        [HttpPost]
+        public IActionResult Add(int id)
         {
-            _basketManager.AddToBasket(productId);
-            return RedirectToAction("Index", "Home");
+            _basketManager.AddToBasket(id);
+            return NoContent();
+        }
+
+        [HttpPost]
+        public IActionResult Remove(int id)
+        {
+            _basketManager.RemoveFromBasket(id);
+            return NoContent();
         }
 
         public async Task<IActionResult> GetBasket()

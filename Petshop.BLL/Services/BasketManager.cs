@@ -88,5 +88,18 @@ namespace Petshop.BLL.Services
             var cookieValue = System.Text.Json.JsonSerializer.Serialize(basket);
             _httpContextAccessor.HttpContext?.Response.Cookies.Append(BasketCookieName, cookieValue, cookieOptions);
         }
+
+        public void ChangeQuantity(int productId, int quantity)
+        {
+            var basket = GetBasketFromCookie();
+            var basketItem = basket.FirstOrDefault(item => item.ProductId == productId);
+           
+            if (basketItem != null)
+            {
+                basketItem.Quantity += quantity;
+
+                SaveBasketToCookie(basket);
+            }
+        }
     }
 }
