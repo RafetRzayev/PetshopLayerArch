@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Petshop.BLL.Services.Contracts;
+using Petshop.BLL.ViewModels;
 
 namespace Petshop.BLL.Services
 {
@@ -89,7 +90,7 @@ namespace Petshop.BLL.Services
             _httpContextAccessor.HttpContext?.Response.Cookies.Append(BasketCookieName, cookieValue, cookieOptions);
         }
 
-        public void ChangeQuantity(int productId, int quantity)
+        public async  Task<BasketViewModel> ChangeQuantityAsync(int productId, int quantity)
         {
             var basket = GetBasketFromCookie();
             var basketItem = basket.FirstOrDefault(item => item.ProductId == productId);
@@ -100,6 +101,25 @@ namespace Petshop.BLL.Services
 
                 SaveBasketToCookie(basket);
             }
+
+            var basketViewModel = new BasketViewModel();
+            foreach (var item in basket)
+            {
+                var product = await _productService.GetByIdAsync(item.ProductId);
+                if (product != null)
+                {
+                    basketViewModel.Items.Add(new ViewModels.BasketItemViewModel
+                    {
+                        ProductId = product.Id,
+                        ProductName = product.Name!,
+                        ImageName = product.CoverImageName!,
+                        Price = product.Price,
+                        Quantity = item.Quantity
+                    });
+                }
+            }
+           
+            return basketViewModel;
         }
     }
 }
